@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     public bool isDead;
 
     public bool isAttack;
+
+    public PhysicsMaterial2D _material2DNormal;
+    public PhysicsMaterial2D _material2DWall;
     private PlayerAnimatiorController _animator;
     private CapsuleCollider2D _collider;
 
@@ -71,11 +74,13 @@ public class PlayerController : MonoBehaviour
             _collider.size = SizeOriginal;
             _collider.offset = offsetOriginal;
         }
+
+        switchMaterial();
     }
 
     private void FixedUpdate()
     {
-        if (!isHurt)
+        if (!isHurt && !isAttack)
             move();
     }
 
@@ -87,6 +92,11 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         InputController.Disable();
+    }
+
+    private void switchMaterial()
+    {
+        _collider.sharedMaterial = _physicsCheck.isGrounded ? _material2DNormal : _material2DWall;
     }
 
     private void Attack(InputAction.CallbackContext obj)
@@ -105,9 +115,14 @@ public class PlayerController : MonoBehaviour
     {
         if (!isCrouch)
             _rb.linearVelocityX = inputDirection.x * speed * Time.deltaTime;
+
+
         //int faceDir=inputDirection.x>=0?1:-1;
         //transform.localScale = new Vector3(faceDir,1,1);
-        _renderer.flipX = inputDirection.x < 0;
+        if (_rb.linearVelocityX < 0)
+            _renderer.flipX = true;
+        else if (_rb.linearVelocityX > 0)
+            _renderer.flipX = false;
     }
 
     private void Jump(InputAction.CallbackContext obj)
