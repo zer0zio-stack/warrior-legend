@@ -1772,7 +1772,7 @@ CompositeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths: []
@@ -1826,6 +1826,7 @@ GameObject:
   - component: {fileID: 415896971}
   - component: {fileID: 415896974}
   - component: {fileID: 415896973}
+  - component: {fileID: 415896975}
   m_Layer: 7
   m_Name: Boar
   m_TagString: Untagged
@@ -2014,8 +2015,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.17944771, y: 0.67257905}
-  m_Size: {x: 2.5117464, y: 1.3452147}
+  m_Offset: {x: -0.113627374, y: 0.62754446}
+  m_Size: {x: 2.158366, y: 1.2551485}
   m_Direction: 1
 --- !u!114 &415896971
 MonoBehaviour:
@@ -2089,6 +2090,26 @@ MonoBehaviour:
   normalSpeed: 100
   runSpeed: 260
   currentSpeed: 0
+--- !u!114 &415896975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415896965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494c7412009498c48ae0d945b94131b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PhysicsCheck
+  isGrounded: 0
+  _nearLeftWall: 0
+  _nearRightWall: 0
+  radius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  offset: {x: 0, y: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2964,7 +2985,7 @@ Transform:
   m_GameObject: {fileID: 1849679019}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: 6.78, y: 2.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3102,6 +3123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   isGrounded: 0
+  _nearLeftWall: 0
+  _nearRightWall: 0
   radius: 0.2
   groundLayer:
     serializedVersion: 2
