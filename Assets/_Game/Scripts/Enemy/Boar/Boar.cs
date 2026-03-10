@@ -7,6 +7,6 @@ public class Boar:Enemy
     public override void Move()
     {
         base.Move();
-        Anim.SetBool("isWalk",true);
+        Anim.SetBool("isWalk",!isWait);
     }
 }

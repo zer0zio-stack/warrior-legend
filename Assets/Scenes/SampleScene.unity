@@ -2090,6 +2090,9 @@ MonoBehaviour:
   normalSpeed: 100
   runSpeed: 260
   currentSpeed: 0
+  waitTimeCount: 0
+  waitTime: 2
+  isWait: 0
 --- !u!114 &415896975
 MonoBehaviour:
   m_ObjectHideFlags: 0

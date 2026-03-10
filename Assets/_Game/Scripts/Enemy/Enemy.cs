@@ -1,27 +1,35 @@
-using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("参数")]
-    public float normalSpeed = 100f;
+    [Header("参数")] public float normalSpeed = 100f;
 
-    public float runSpeed=260f;
+    public float runSpeed = 260f;
     public float currentSpeed;
-    
 
-    protected Rigidbody2D Rb;
+    [Header("计时")] public float waitTimeCount;
+
+    public float waitTime;
+    public bool isWait;
+    private SpriteRenderer _renderer;
     protected Animator Anim;
     private PhysicsCheck PhysicsCheck;
-    private SpriteRenderer _renderer;
-    
+
+    protected Rigidbody2D Rb;
+
     private void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
         PhysicsCheck = GetComponent<PhysicsCheck>();
         _renderer = GetComponent<SpriteRenderer>();
-        currentSpeed=normalSpeed;
+        currentSpeed = normalSpeed;
+        waitTimeCount = waitTime;
+    }
+
+    private void Update()
+    {
+        Wait();
     }
 
     private void FixedUpdate()
@@ -31,10 +39,24 @@ public class Enemy : MonoBehaviour
 
     public virtual void Move()
     {
-        Rb.linearVelocityX = _renderer.flipX?1:-1* normalSpeed * Time.deltaTime;
+        Rb.linearVelocityX = _renderer.flipX ? 1 : -1 * normalSpeed * Time.deltaTime;
         if ((PhysicsCheck._nearRightWall && _renderer.flipX) || (PhysicsCheck._nearLeftWall && !_renderer.flipX))
         {
-               _renderer.flipX = !_renderer.flipX;
+            isWait = true;
+        }
+    }
+
+    private void Wait()
+    {
+        if (isWait)
+        {
+            waitTimeCount -= Time.deltaTime;
+            if (waitTimeCount <= 0)
+            {
+                isWait = false;
+                _renderer.flipX = !_renderer.flipX;
+                waitTimeCount = waitTime;
+            }
         }
     }
 }
