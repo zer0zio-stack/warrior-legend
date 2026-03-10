@@ -1878,7 +1878,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.4762273, y: 0.26684558}
+  m_Size: {x: 2.16, y: 0.26684558}
   m_EdgeRadius: 0
 --- !u!50 &415896967
 Rigidbody2D:
@@ -2015,8 +2015,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.07937377, y: 0.62754446}
-  m_Size: {x: 1.7610128, y: 1.2551485}
+  m_Offset: {x: -0.087527685, y: 0.62754446}
+  m_Size: {x: 2.1360755, y: 1.2551485}
   m_Direction: 1
 --- !u!114 &415896971
 MonoBehaviour:
@@ -2102,10 +2102,11 @@ MonoBehaviour:
   normalSpeed: 100
   runSpeed: 260
   currentSpeed: 0
-  hurtForce: 6
+  hurtForce: 4.5
   waitTimeCount: 0
   waitTime: 2
   isWait: 0
+  isHurt: 0
   _AttackTransform: {fileID: 1849679021}
 --- !u!114 &415896975
 MonoBehaviour:

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -12,10 +14,10 @@ public class Enemy : MonoBehaviour
 
     public float waitTime;
     public bool isWait;
+    public bool isHurt;
 
     [Header("组件")] public Transform _AttackTransform;
-
-    private SpriteRenderer _renderer;
+    
     protected Animator Anim;
     private PhysicsCheck PhysicsCheck;
 
@@ -26,7 +28,6 @@ public class Enemy : MonoBehaviour
         Rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
         PhysicsCheck = GetComponent<PhysicsCheck>();
-        _renderer = GetComponent<SpriteRenderer>();
         currentSpeed = normalSpeed;
         waitTimeCount = waitTime;
     }
@@ -38,14 +39,16 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if(!isHurt)
+            Move();
     }
 
     public virtual void Move()
     {
-        Rb.linearVelocityX = _renderer.flipX ? 1 : -1 * normalSpeed * Time.deltaTime;
-        if ((PhysicsCheck._nearRightWall && _renderer.flipX) ||
-            (PhysicsCheck._nearLeftWall && !_renderer.flipX)) isWait = true;
+        float localScaleX = transform.localScale.x;
+        Rb.linearVelocityX = -localScaleX * normalSpeed * Time.deltaTime;                  
+        if ((PhysicsCheck._nearRightWall && localScaleX==-1f) || (PhysicsCheck._nearLeftWall && localScaleX==1f)) 
+            isWait = true;
     }
 
     private void Wait()
@@ -56,7 +59,7 @@ public class Enemy : MonoBehaviour
             if (waitTimeCount <= 0)
             {
                 isWait = false;
-                _renderer.flipX = !_renderer.flipX;
+                transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
                 waitTimeCount = waitTime;
             }
         }
@@ -65,10 +68,21 @@ public class Enemy : MonoBehaviour
     public void OnHurt()
     {
         //转身
-        _renderer.flipX = _AttackTransform.position.x > transform.position.x ? true : false;
+        transform.localScale = new Vector3(_AttackTransform.position.x > transform.position.x ? -1 : 1, 1, 1);
         //播放动画
+        isHurt=true;
         Anim.SetTrigger("isHurt");
         //后退
-        Rb.AddForce(new Vector2(_renderer.flipX ? 1 : -1, 0) * hurtForce, ForceMode2D.Impulse);
+        StartCoroutine(hurt(new Vector2(transform.localScale.x, 0)));
     }
+    
+    //协程，等待一段时间后恢复行走，要不然刚揣它一脚，还没开始飞呢就开始行走了。
+    private IEnumerator hurt(Vector2 dir)
+    {
+        Rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.5f);
+        isHurt = false;
+    }
+
+
 }

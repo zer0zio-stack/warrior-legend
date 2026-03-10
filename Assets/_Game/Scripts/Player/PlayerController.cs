@@ -120,9 +120,9 @@ public class PlayerController : MonoBehaviour
         //int faceDir=inputDirection.x>=0?1:-1;
         //transform.localScale = new Vector3(faceDir,1,1);
         if (_rb.linearVelocityX < 0)
-            _renderer.flipX = true;
+            transform.localScale = new Vector3(-1, 1, 1);
         else if (_rb.linearVelocityX > 0)
-            _renderer.flipX = false;
+            transform.localScale = new Vector3(1, 1, 1);
     }
 
     private void Jump(InputAction.CallbackContext obj)
