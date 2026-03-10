@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public float waitTime;
     public bool isWait;
     public bool isHurt;
+    public bool isDead;
 
     [Header("组件")] public Transform _AttackTransform;
     
@@ -39,7 +40,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!isHurt)
+        if(!isHurt && !isDead)
             Move();
     }
 
@@ -84,5 +85,18 @@ public class Enemy : MonoBehaviour
         isHurt = false;
     }
 
+    public void OnDie()
+    {
+        //这里把野猪流放到第二图层，第二图层已经被禁止和palyer层的碰撞
+        gameObject.layer = 2;
+        
+        isDead=true;
+        Anim.SetBool("isDead",true);
+    }
+
+    public void DestroyOnAnimation()
+    {
+        Destroy(this.gameObject);
+    }
 
 }
