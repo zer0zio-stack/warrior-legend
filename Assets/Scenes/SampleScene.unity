@@ -2015,8 +2015,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.113627374, y: 0.62754446}
-  m_Size: {x: 2.158366, y: 1.2551485}
+  m_Offset: {x: -0.07937377, y: 0.62754446}
+  m_Size: {x: 1.7610128, y: 1.2551485}
   m_Direction: 1
 --- !u!114 &415896971
 MonoBehaviour:
@@ -2030,13 +2030,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0da08a1a9e9c274c809166730b1f5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Charactor
-  maxHealth: 50
-  currentHealth: 50
-  _invincibleTimeMax: 1
+  maxHealth: 200
+  currentHealth: 200
+  _invincibleTimeMax: 0.1
   isDie: 0
   HurtEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 415896974}
+        m_TargetAssemblyTypeName: Boar, Assembly-CSharp
+        m_MethodName: OnHurt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDeadEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -2090,9 +2102,11 @@ MonoBehaviour:
   normalSpeed: 100
   runSpeed: 260
   currentSpeed: 0
+  hurtForce: 6
   waitTimeCount: 0
   waitTime: 2
   isWait: 0
+  _AttackTransform: {fileID: 1849679021}
 --- !u!114 &415896975
 MonoBehaviour:
   m_ObjectHideFlags: 0

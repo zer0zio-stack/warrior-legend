@@ -6,11 +6,15 @@ public class Enemy : MonoBehaviour
 
     public float runSpeed = 260f;
     public float currentSpeed;
+    public float hurtForce;
 
     [Header("计时")] public float waitTimeCount;
 
     public float waitTime;
     public bool isWait;
+
+    [Header("组件")] public Transform _AttackTransform;
+
     private SpriteRenderer _renderer;
     protected Animator Anim;
     private PhysicsCheck PhysicsCheck;
@@ -40,10 +44,8 @@ public class Enemy : MonoBehaviour
     public virtual void Move()
     {
         Rb.linearVelocityX = _renderer.flipX ? 1 : -1 * normalSpeed * Time.deltaTime;
-        if ((PhysicsCheck._nearRightWall && _renderer.flipX) || (PhysicsCheck._nearLeftWall && !_renderer.flipX))
-        {
-            isWait = true;
-        }
+        if ((PhysicsCheck._nearRightWall && _renderer.flipX) ||
+            (PhysicsCheck._nearLeftWall && !_renderer.flipX)) isWait = true;
     }
 
     private void Wait()
@@ -58,5 +60,15 @@ public class Enemy : MonoBehaviour
                 waitTimeCount = waitTime;
             }
         }
+    }
+
+    public void OnHurt()
+    {
+        //转身
+        _renderer.flipX = _AttackTransform.position.x > transform.position.x ? true : false;
+        //播放动画
+        Anim.SetTrigger("isHurt");
+        //后退
+        Rb.AddForce(new Vector2(_renderer.flipX ? 1 : -1, 0) * hurtForce, ForceMode2D.Impulse);
     }
 }
