@@ -8,7 +8,7 @@ public class PhysicsCheck : MonoBehaviour
     public float radius;
     public LayerMask groundLayer;
     public Vector2 offset;
-    
+
     private CapsuleCollider2D _capsuleCollider2d;
 
     private void Awake()
@@ -27,21 +27,28 @@ public class PhysicsCheck : MonoBehaviour
     {
         _capsuleCollider2d = GetComponent<CapsuleCollider2D>();
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere((Vector2)transform.position + offset, radius);
-        Gizmos.DrawWireSphere(
-            (Vector2)transform.position + _capsuleCollider2d.offset+new Vector2(_capsuleCollider2d.size.x/2 + radius,0),
+        Gizmos.DrawWireSphere((Vector2)transform.position + offset + new Vector2(-1.4f * transform.localScale.x, 0),
             radius);
         Gizmos.DrawWireSphere(
-            (Vector2)transform.position + _capsuleCollider2d.offset+new Vector2(-_capsuleCollider2d.size.x/2 - radius,0),
+            (Vector2)transform.position + _capsuleCollider2d.offset +
+            new Vector2(_capsuleCollider2d.size.x / 2 + radius, 0),
+            radius);
+        Gizmos.DrawWireSphere(
+            (Vector2)transform.position + _capsuleCollider2d.offset +
+            new Vector2(-_capsuleCollider2d.size.x / 2 - radius, 0),
             radius);
     }
 
     private void Check()
     {
-        isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + offset, radius, groundLayer);
-        _nearRightWall = Physics2D.OverlapCircle((Vector2)transform.position + _capsuleCollider2d.offset + new Vector2(_capsuleCollider2d.size.x/2 + radius, _capsuleCollider2d.size.y),
+        isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + offset + new Vector2(-1.4f * transform.localScale.x, 0), radius, groundLayer);
+        _nearRightWall = Physics2D.OverlapCircle(
+            (Vector2)transform.position + _capsuleCollider2d.offset +
+            new Vector2(_capsuleCollider2d.size.x / 2 + radius, _capsuleCollider2d.size.y),
             radius, groundLayer);
-        _nearLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + _capsuleCollider2d.offset + new Vector2(-_capsuleCollider2d.size.x/2 - radius, _capsuleCollider2d.size.y),
+        _nearLeftWall = Physics2D.OverlapCircle(
+            (Vector2)transform.position + _capsuleCollider2d.offset +
+            new Vector2(-_capsuleCollider2d.size.x / 2 - radius, _capsuleCollider2d.size.y),
             radius, groundLayer);
     }
 }

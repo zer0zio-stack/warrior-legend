@@ -1,12 +1,8 @@
-using System;
-using Unity.VisualScripting;
-using UnityEngine;
-
-public class Boar:Enemy
+public class Boar : Enemy
 {
-    public override void Move()
+    protected override void Awake()
     {
-        base.Move();
-        Anim.SetBool("isWalk",!isWait);
+        base.Awake();
+        PatrolState = new BoarPatrolState();
     }
 }
