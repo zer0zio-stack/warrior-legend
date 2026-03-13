@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator), typeof(Rigidbody2D), typeof(PhysicsCheck))]
 public class Enemy : MonoBehaviour
 {
     [Header("速度")] public float normalSpeed = 100f;
 
     public float runSpeed = 260f;
-    public float currentSpeed;
 
     [Header("击退力量")] public float hurtForce;
 
@@ -14,8 +14,19 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector] public float waitTimeCount;
 
-    [Header("状态")] public bool isWait;
+    [Header("检测参数")] public Vector2 offset;
 
+    public Vector2 size;
+    public float distance;
+    public LayerMask enemyLayer;
+
+    [Header("miss时间")] public float missTime;
+
+    [HideInInspector] public float missTimeCount;
+
+
+    [Header("状态")] 
+    public bool isWait;
     public bool isHurt;
     public bool isDead;
 
@@ -23,10 +34,9 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector] public Animator Anim;
     [HideInInspector] public PhysicsCheck PhysicsCheck;
-
     [HideInInspector] public Rigidbody2D Rb;
+    
     [HideInInspector] public BaseState ChaseState;
-
     [HideInInspector] public BaseState CurrentState;
     [HideInInspector] public BaseState PatrolState;
 
@@ -35,8 +45,6 @@ public class Enemy : MonoBehaviour
         Rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
         PhysicsCheck = GetComponent<PhysicsCheck>();
-        currentSpeed = normalSpeed;
-        waitTimeCount = waitTime;
     }
 
     private void Update()
@@ -60,6 +68,22 @@ public class Enemy : MonoBehaviour
         CurrentState.OnExit();
     }
 
+    //绘制检测敌人的范围
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blueViolet;
+        Gizmos.DrawWireCube(transform.position + (Vector3)offset + new Vector3(-transform.localScale.x * distance, 0),
+            size);
+    }
+    //检测敌人是否进入攻击视野
+    public bool LookedPlayer()
+    {
+        return Physics2D.BoxCast(transform.position + (Vector3)offset, size, 0, new Vector2(-transform.localScale.x, 0),
+            distance, enemyLayer);
+    } 
+
+
+    #region 受伤逻辑 
 
     public void OnHurt()
     {
@@ -80,17 +104,26 @@ public class Enemy : MonoBehaviour
         isHurt = false;
     }
 
+    #endregion
+
+
+
+    #region die 逻辑
+
     public void OnDie()
     {
         //这里把野猪流放到第二图层，第二图层已经被禁止和palyer层的碰撞
         gameObject.layer = 2;
-
         isDead = true;
         Anim.SetBool("isDead", true);
     }
 
+    //这个方法被死亡动画的结束帧事件调用
     public void DestroyOnAnimation()
     {
         Destroy(gameObject);
     }
+
+    #endregion
+    
 }

@@ -8,11 +8,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - grassland
   - Water
   - UI
   - Ground
-  - boar
+  - enemy
   - player
   - 
   - 
