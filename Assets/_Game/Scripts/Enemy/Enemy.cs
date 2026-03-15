@@ -1,9 +1,18 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Animator), typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
+    public enum State
+    {
+        Chase,
+        Patrol,
+        Hide
+    }
+
     [Header("速度")] public float normalSpeed = 100f;
 
     public float runSpeed = 260f;
@@ -19,11 +28,14 @@ public class Enemy : MonoBehaviour
     public Vector2 size;
     public float distance;
     public LayerMask enemyLayer;
+    [Header("bee检测参数")] public float lookRadius;
+    public float patrolRadius;
+    [HideInInspector] public Vector3 originalPoint;
 
     [Header("miss时间")] public float missTime;
 
     [HideInInspector] public float missTimeCount;
-
+    [HideInInspector] public Transform attackerTransform;
 
     [Header("状态")] public bool isWait;
 
@@ -47,6 +59,7 @@ public class Enemy : MonoBehaviour
         Anim = GetComponent<Animator>();
         PhysicsCheck = GetComponent<PhysicsCheck>();
         Charactor = GetComponent<Charactor>();
+        originalPoint = transform.position;
     }
 
     private void Update()
@@ -71,15 +84,49 @@ public class Enemy : MonoBehaviour
     }
 
     //绘制检测敌人的范围
-    private void OnDrawGizmosSelected()
+    public virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blueViolet;
         Gizmos.DrawWireCube(transform.position + (Vector3)offset + new Vector3(-transform.localScale.x * distance, 0),
             size);
     }
 
+    public void SwitchState(State state)
+    {
+        CurrentState.OnExit();
+        CurrentState = state switch
+        {
+            State.Chase => ChaseState,
+            State.Patrol => PatrolState,
+            State.Hide => HideState,
+            _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
+        };
+        CurrentState.OnEnter(this);
+    }
+
+    public Vector2 GetRandomPoint()
+    {
+        var angle = Random.Range(0f, Mathf.PI * 2f); // [0, 2π]
+        var r = patrolRadius * Mathf.Sqrt(Random.value); // 均匀分布半径
+        var x = r * Mathf.Cos(angle);
+        var y = r * Mathf.Sin(angle);
+        return (Vector2)originalPoint + new Vector2(x, y);
+    }
+    
+    public void WaitTimeCount()
+    {
+        if (!isWait)
+        {
+            waitTimeCount = waitTime;
+        }
+        else
+        {
+            waitTimeCount-=Time.deltaTime;
+        }
+    }
+
     //检测敌人是否进入攻击视野
-    public bool LookedPlayer()
+    public virtual bool LookedPlayer()
     {
         return Physics2D.BoxCast(transform.position + (Vector3)offset, size, 0, new Vector2(-transform.localScale.x, 0),
             distance, enemyLayer);
