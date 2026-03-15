@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class BoarChaseState : BaseState
 {
-    
     public override void OnEnter(Enemy enemy)
     {
         CEnemy = enemy;
         CEnemy.Anim.SetBool("isRun", true);
     }
-    
+
     public override void LogicUpdate()
     {
         //撞墙立刻回头
@@ -16,7 +15,6 @@ public class BoarChaseState : BaseState
         if (!CEnemy.PhysicsCheck.isGrounded || (CEnemy.PhysicsCheck._nearRightWall && localScaleX == -1f) ||
             (CEnemy.PhysicsCheck._nearLeftWall && localScaleX == 1f))
             CEnemy.transform.localScale = new Vector3(-CEnemy.transform.localScale.x, 1, 1);
-        //TOdo
         //检测是否丢失目标
         if (!CEnemy.LookedPlayer())
         {

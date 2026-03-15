@@ -8,6 +8,8 @@ public class PhysicsCheck : MonoBehaviour
     public float radius;
     public LayerMask groundLayer;
     public Vector2 offset;
+    //玩家补丁，因为玩家的朝向和敌人不同，所以方向iaGround的检测范围也要相反
+    public bool isPlayer;
 
     private CapsuleCollider2D _capsuleCollider2d;
 
@@ -27,8 +29,14 @@ public class PhysicsCheck : MonoBehaviour
     {
         _capsuleCollider2d = GetComponent<CapsuleCollider2D>();
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere((Vector2)transform.position + offset + new Vector2(-1.4f * transform.localScale.x, 0),
-            radius);
+        if (!isPlayer)
+        {
+            Gizmos.DrawWireSphere((Vector2)transform.position + offset + new Vector2(-1.4f * transform.localScale.x, 0),radius);
+        }
+        else
+        {
+            Gizmos.DrawWireSphere((Vector2)transform.position + offset, radius);
+        }
         Gizmos.DrawWireSphere(
             (Vector2)transform.position + _capsuleCollider2d.offset +
             new Vector2(_capsuleCollider2d.size.x / 2 + radius, 0),
@@ -41,7 +49,14 @@ public class PhysicsCheck : MonoBehaviour
 
     private void Check()
     {
-        isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + offset + new Vector2(-1.4f * transform.localScale.x, 0), radius, groundLayer);
+        if (!isPlayer)
+        {
+            isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + offset + new Vector2(-1.4f * transform.localScale.x, 0), radius, groundLayer);
+        }
+        else
+        {
+            isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + offset, radius, groundLayer);
+        }
         _nearRightWall = Physics2D.OverlapCircle(
             (Vector2)transform.position + _capsuleCollider2d.offset +
             new Vector2(_capsuleCollider2d.size.x / 2 + radius, _capsuleCollider2d.size.y),
