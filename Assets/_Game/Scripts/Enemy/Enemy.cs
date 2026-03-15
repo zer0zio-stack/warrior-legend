@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator), typeof(Rigidbody2D), typeof(PhysicsCheck))]
+[RequireComponent(typeof(Animator), typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
     [Header("速度")] public float normalSpeed = 100f;
