@@ -25,19 +25,20 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public float missTimeCount;
 
 
-    [Header("状态")] 
-    public bool isWait;
+    [Header("状态")] public bool isWait;
+
     public bool isHurt;
     public bool isDead;
 
-    [Header("组件")] [HideInInspector] public Transform _AttackTransform;
+    [Header("组件")] [HideInInspector] public Animator Anim;
 
-    [HideInInspector] public Animator Anim;
     [HideInInspector] public PhysicsCheck PhysicsCheck;
     [HideInInspector] public Rigidbody2D Rb;
-    
+    [HideInInspector] public Charactor Charactor;
+
     [HideInInspector] public BaseState ChaseState;
     [HideInInspector] public BaseState CurrentState;
+    [HideInInspector] public BaseState HideState;
     [HideInInspector] public BaseState PatrolState;
 
     protected virtual void Awake()
@@ -45,6 +46,7 @@ public class Enemy : MonoBehaviour
         Rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
         PhysicsCheck = GetComponent<PhysicsCheck>();
+        Charactor = GetComponent<Charactor>();
     }
 
     private void Update()
@@ -75,20 +77,21 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireCube(transform.position + (Vector3)offset + new Vector3(-transform.localScale.x * distance, 0),
             size);
     }
+
     //检测敌人是否进入攻击视野
     public bool LookedPlayer()
     {
         return Physics2D.BoxCast(transform.position + (Vector3)offset, size, 0, new Vector2(-transform.localScale.x, 0),
             distance, enemyLayer);
-    } 
+    }
 
 
-    #region 受伤逻辑 
+    #region 受伤逻辑
 
-    public void OnHurt()
+    public virtual void OnHurt(Transform attackTransform)
     {
         //转身
-        transform.localScale = new Vector3(_AttackTransform.position.x > transform.position.x ? -1 : 1, 1, 1);
+        transform.localScale = new Vector3(attackTransform.position.x > transform.position.x ? -1 : 1, 1, 1);
         //播放动画
         isHurt = true;
         Anim.SetTrigger("isHurt");
@@ -105,7 +108,6 @@ public class Enemy : MonoBehaviour
     }
 
     #endregion
-
 
 
     #region die 逻辑
@@ -125,5 +127,4 @@ public class Enemy : MonoBehaviour
     }
 
     #endregion
-    
 }

@@ -1805,6 +1805,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _isInvincible: 0
 --- !u!114 &415896972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1868,10 +1869,10 @@ MonoBehaviour:
   isWait: 0
   isHurt: 0
   isDead: 0
-  _AttackTransform: {fileID: 1849679021}
   Anim: {fileID: 0}
   PhysicsCheck: {fileID: 0}
   Rb: {fileID: 0}
+  Charactor: {fileID: 0}
 --- !u!114 &415896975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2928,7 +2929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Snail
   normalSpeed: 60
   runSpeed: 0
-  hurtForce: 0
+  hurtForce: 2.2
   waitTime: 2
   waitTimeCount: 0
   offset: {x: 0, y: 0.52}
@@ -2937,15 +2938,15 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  missTime: 6
+  missTime: 3
   missTimeCount: 0
   isWait: 0
   isHurt: 0
   isDead: 0
-  _AttackTransform: {fileID: 0}
   Anim: {fileID: 0}
   PhysicsCheck: {fileID: 0}
   Rb: {fileID: 0}
+  Charactor: {fileID: 0}
 --- !u!114 &1555123256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3042,7 +3043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Charactor
   maxHealth: 600
   currentHealth: 0
-  _invincibleTimeMax: 1
+  _invincibleTimeMax: 10000
   isDie: 0
   HurtEvent:
     m_PersistentCalls:
@@ -3050,10 +3051,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1555123255}
         m_TargetAssemblyTypeName: Snail, Assembly-CSharp
         m_MethodName: OnHurt
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1849679021}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3074,6 +3075,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _isInvincible: 0
 --- !u!70 &1555123261
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3441,6 +3443,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _isInvincible: 0
 --- !u!1 &2050009771
 GameObject:
   m_ObjectHideFlags: 0

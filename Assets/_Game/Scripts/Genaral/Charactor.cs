@@ -17,11 +17,11 @@ public class Charactor : MonoBehaviour
 
     public UnityEvent OnDeadEvent;
 
+    //是否无敌
+    public bool _isInvincible;
+
     //无敌时间
     private float _invincibleTime;
-
-    //是否无敌
-    private bool _isInvincible;
 
     public void Start()
     {
