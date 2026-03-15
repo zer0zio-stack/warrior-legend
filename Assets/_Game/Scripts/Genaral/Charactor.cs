@@ -50,7 +50,7 @@ public class Charactor : MonoBehaviour
         {
             if (_isInvincible)
                 return;
-            if (currentHealth >= attack.damage)
+            if (currentHealth > attack.damage)
             {
                 currentHealth -= attack.damage;
                 _isInvincible = true;
