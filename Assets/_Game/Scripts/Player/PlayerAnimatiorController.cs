@@ -31,6 +31,7 @@ public class PlayerAnimatiorController : MonoBehaviour
         _animator.SetBool("isCrouch", _playerController.isCrouch);
         _animator.SetBool("isDead", _playerController.isDead);
         _animator.SetBool("isAttack", _playerController.isAttack);
+        _animator.SetBool("OnWall", _physicsCheck.onWall);
     }
 
     public void PlayHurt()

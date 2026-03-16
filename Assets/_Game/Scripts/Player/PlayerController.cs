@@ -75,6 +75,10 @@ public class PlayerController : MonoBehaviour
             _collider.offset = offsetOriginal;
         }
 
+        //滑墙：这里直接调速度，要是变摩擦力就会黏住
+        if (_physicsCheck.onWall) _rb.linearVelocityY = _rb.linearVelocityY / 2;
+
+
         switchMaterial();
     }
 
