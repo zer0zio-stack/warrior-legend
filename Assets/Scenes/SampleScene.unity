@@ -4811,6 +4811,7 @@ MonoBehaviour:
   hurtForce: 5
   isDead: 0
   isAttack: 0
+  JumpWallForce: 14
   _material2DNormal: {fileID: 6200000, guid: a0728630cde975c4b8b70a7bdd8c5866, type: 2}
   _material2DWall: {fileID: 6200000, guid: 6358db590b781554f87ee68bad684f12, type: 2}
 --- !u!114 &1849679025
