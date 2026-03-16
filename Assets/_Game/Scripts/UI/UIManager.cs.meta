@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 8c2177642e011f246a80c5a750ceb241
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - CharactorEvent: {instanceID: 0}
+  - playerStateBar: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

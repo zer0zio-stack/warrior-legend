@@ -17,6 +17,8 @@ public class Charactor : MonoBehaviour
 
     public UnityEvent OnDeadEvent;
 
+    public UnityEvent<Charactor> OnChangeHealthEvent;
+
     //是否无敌
     public bool _isInvincible;
 
@@ -30,6 +32,7 @@ public class Charactor : MonoBehaviour
         _isInvincible = false;
         _invincibleTime = _invincibleTimeMax;
         isDie = false;
+        OnChangeHealthEvent?.Invoke(this);
     }
 
     private void Update()
@@ -63,6 +66,8 @@ public class Charactor : MonoBehaviour
                 isDie = true;
                 OnDeadEvent?.Invoke();
             }
+
+            OnChangeHealthEvent?.Invoke(this);
         }
     }
 }

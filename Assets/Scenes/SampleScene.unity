@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &108753105
 Rigidbody2D:
   serializedVersion: 5
@@ -348,6 +348,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnChangeHealthEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _isInvincible: 0
 --- !u!114 &108753111
 MonoBehaviour:
@@ -538,7 +541,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.848
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -551,6 +554,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224429267}
   m_CullTransparentMesh: 1
+--- !u!1 &287066452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 287066454}
+  - component: {fileID: 287066453}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &287066453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287066452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2177642e011f246a80c5a750ceb241, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  CharactorEvent: {fileID: 11400000, guid: da4a61ec9c22a914a9cffc0ff1bb0d8b, type: 2}
+  playerStateBar: {fileID: 733872298}
+--- !u!4 &287066454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287066452}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 529.2892, y: 886.5672, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &289175318
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,7 +2254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &415896966
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2402,8 +2451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0da08a1a9e9c274c809166730b1f5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Charactor
-  maxHealth: 200
-  currentHealth: 200
+  maxHealth: 100
+  currentHealth: 0
   _invincibleTimeMax: 0.1
   isDie: 0
   HurtEvent:
@@ -2412,10 +2461,10 @@ MonoBehaviour:
       - m_Target: {fileID: 415896974}
         m_TargetAssemblyTypeName: Boar, Assembly-CSharp
         m_MethodName: OnHurt
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1849679021}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2436,6 +2485,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnChangeHealthEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _isInvincible: 0
 --- !u!114 &415896972
 MonoBehaviour:
@@ -2449,7 +2501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86993d4dbf8f5b14c815b9759331d89b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Attack
-  damage: 15
+  damage: 8
   range: 0
   frequency: 0
 --- !u!95 &415896973
@@ -2812,7 +2864,7 @@ GameObject:
   - component: {fileID: 579665418}
   - component: {fileID: 579665417}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: canve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2994,6 +3046,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 733872297}
+  - component: {fileID: 733872298}
   m_Layer: 5
   m_Name: StateBar
   m_TagString: Untagged
@@ -3023,6 +3076,21 @@ RectTransform:
   m_AnchoredPosition: {x: 402.47916, y: -142.88554}
   m_SizeDelta: {x: 804.9583, y: 285.7711}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &733872298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733872296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f079b551de2573f4fb3290c0c3a2a094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStateBar
+  healthBar: {fileID: 133469616}
+  healthBarRed: {fileID: 224429269}
+  powerBar: {fileID: 1861199165}
 --- !u!1 &1015104449
 GameObject:
   m_ObjectHideFlags: 0
@@ -3901,7 +3969,7 @@ GameObject:
   - component: {fileID: 1489402540}
   - component: {fileID: 1489402539}
   m_Layer: 5
-  m_Name: healthFrame
+  m_Name: powerFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4314,6 +4382,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnChangeHealthEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _isInvincible: 0
 --- !u!70 &1555123261
 CapsuleCollider2D:
@@ -4683,6 +4754,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnChangeHealthEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: da4a61ec9c22a914a9cffc0ff1bb0d8b, type: 2}
+        m_TargetAssemblyTypeName: CharactorEventSO, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _isInvincible: 0
 --- !u!1 &1861199163
 GameObject:
@@ -4696,7 +4782,7 @@ GameObject:
   - component: {fileID: 1861199166}
   - component: {fileID: 1861199165}
   m_Layer: 5
-  m_Name: health
+  m_Name: power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4877,3 +4963,4 @@ SceneRoots:
   - {fileID: 108753109}
   - {fileID: 579665420}
   - {fileID: 1350686666}
+  - {fileID: 287066454}
