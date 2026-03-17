@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,10 @@ public class PlayerController : MonoBehaviour
     public bool isDead;
 
     public bool isAttack;
+
+    public bool isSlide;
+    public float slideDistance;
+    public float slideSpeed;
 
     public float JumpWallForce;
 
@@ -44,6 +49,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<PlayerAnimatiorController>();
         InputController.Playing.Jump.started += Jump;
         InputController.Playing.Attack.started += Attack;
+        InputController.Playing.Slide.started += Slide;
         runSpeed = speed;
         walkSpeed = speed / 2.5f;
 
@@ -102,6 +108,36 @@ public class PlayerController : MonoBehaviour
         InputController.Disable();
     }
 
+    private void Slide(InputAction.CallbackContext obj)
+    {
+        if (!isSlide)
+        {
+            isSlide = true;
+            var targetPoint = new Vector2(transform.position.x + transform.localScale.x * slideDistance,
+                transform.position.y);
+            gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+            StartCoroutine(SlideCoroutine(targetPoint));
+        }
+    }
+
+    private IEnumerator SlideCoroutine(Vector2 targetPoint)
+    {
+        do
+        {
+            yield return null;
+            if (_physicsCheck.isFaceCliff) break;
+
+            if ((_physicsCheck._nearLeftWall && transform.localScale.x < 0) ||
+                (_physicsCheck._nearRightWall && transform.localScale.x > 0))
+                break;
+
+            _rb.MovePosition(new Vector2(transform.position.x + transform.localScale.x * slideSpeed,
+                transform.position.y));
+        } while (MathF.Abs(targetPoint.x - transform.position.x) > 0.1f);
+        isSlide = false;
+        gameObject.layer = LayerMask.NameToLayer("player");
+    }
+
     private void switchMaterial()
     {
         _collider.sharedMaterial = _physicsCheck.isGrounded ? _material2DNormal : _material2DWall;
@@ -135,6 +171,12 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext obj)
     {
+        if (isSlide)
+        {
+            StopAllCoroutines();
+            isSlide = false;
+        }
+
         if (_physicsCheck.isGrounded) _rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         if (_physicsCheck.onWall)
         {

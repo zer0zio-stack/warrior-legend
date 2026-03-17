@@ -181,6 +181,15 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Slide"",
+                    ""type"": ""Button"",
+                    ""id"": ""642dd5a6-1e5b-408f-99fe-9dc83072046f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -590,6 +599,50 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
                     ""action"": ""OnWalk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aff0230d-040c-4a44-b7b0-d5019e8a5c5b"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Slide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""390d4a86-f363-4d7d-acfe-15758176c7a5"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slide"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""6642a89c-a1c2-443f-8c4b-99886c39c5ff"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Slide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""51fea354-6413-45b0-807e-d958f3b4613d"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Slide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1185,6 +1238,7 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
         m_Playing_Next = m_Playing.FindAction("Next", throwIfNotFound: true);
         m_Playing_Sprint = m_Playing.FindAction("Sprint", throwIfNotFound: true);
         m_Playing_OnWalk = m_Playing.FindAction("OnWalk", throwIfNotFound: true);
+        m_Playing_Slide = m_Playing.FindAction("Slide", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1288,6 +1342,7 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Playing_Next;
     private readonly InputAction m_Playing_Sprint;
     private readonly InputAction m_Playing_OnWalk;
+    private readonly InputAction m_Playing_Slide;
     /// <summary>
     /// Provides access to input actions defined in input action map "Playing".
     /// </summary>
@@ -1339,6 +1394,10 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Playing/OnWalk".
         /// </summary>
         public InputAction @OnWalk => m_Wrapper.m_Playing_OnWalk;
+        /// <summary>
+        /// Provides access to the underlying input action "Playing/Slide".
+        /// </summary>
+        public InputAction @Slide => m_Wrapper.m_Playing_Slide;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1395,6 +1454,9 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
             @OnWalk.started += instance.OnOnWalk;
             @OnWalk.performed += instance.OnOnWalk;
             @OnWalk.canceled += instance.OnOnWalk;
+            @Slide.started += instance.OnSlide;
+            @Slide.performed += instance.OnSlide;
+            @Slide.canceled += instance.OnSlide;
         }
 
         /// <summary>
@@ -1436,6 +1498,9 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
             @OnWalk.started -= instance.OnOnWalk;
             @OnWalk.performed -= instance.OnOnWalk;
             @OnWalk.canceled -= instance.OnOnWalk;
+            @Slide.started -= instance.OnSlide;
+            @Slide.performed -= instance.OnSlide;
+            @Slide.canceled -= instance.OnSlide;
         }
 
         /// <summary>
@@ -1806,6 +1871,13 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOnWalk(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Slide" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSlide(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
