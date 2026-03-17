@@ -354,6 +354,9 @@ MonoBehaviour:
   OnChangeHealthEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnChangePowerEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _isInvincible: 0
 --- !u!114 &108753111
 MonoBehaviour:
@@ -2494,6 +2497,9 @@ MonoBehaviour:
   OnChangeHealthEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnChangePowerEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _isInvincible: 0
 --- !u!114 &415896972
 MonoBehaviour:
@@ -4400,6 +4406,9 @@ MonoBehaviour:
   OnChangeHealthEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnChangePowerEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _isInvincible: 0
 --- !u!70 &1555123261
 CapsuleCollider2D:
@@ -4627,6 +4636,7 @@ MonoBehaviour:
   isSlide: 0
   slideDistance: 3.5
   slideSpeed: 0.3
+  powerPerSlide: 5
   JumpWallForce: 12
   _material2DNormal: {fileID: 6200000, guid: a0728630cde975c4b8b70a7bdd8c5866, type: 2}
   _material2DWall: {fileID: 6200000, guid: 6358db590b781554f87ee68bad684f12, type: 2}
@@ -4732,9 +4742,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   maxHealth: 100
   currentHealth: 100
-  maxPower: 0
-  currentPower: 0
-  recoverSpeed: 0
+  maxPower: 15
+  currentPower: 1
+  recoverSpeed: 0.8
   _invincibleTimeMax: 1
   isDie: 0
   HurtEvent:
@@ -4780,6 +4790,21 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   OnChangeHealthEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: da4a61ec9c22a914a9cffc0ff1bb0d8b, type: 2}
+        m_TargetAssemblyTypeName: CharactorEventSO, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnChangePowerEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: da4a61ec9c22a914a9cffc0ff1bb0d8b, type: 2}

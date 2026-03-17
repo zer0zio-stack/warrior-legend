@@ -8,6 +8,12 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         CharactorEvent.CharacterEventAction += _UpdateHealth;
+        CharactorEvent.CharacterEventAction += _UpdatePower;
+    }
+
+    private void _UpdatePower(Charactor arg0)
+    {
+        playerStateBar.OnPowerBarChange(arg0.currentPower/arg0.maxPower);
     }
 
     private void OnDisable()

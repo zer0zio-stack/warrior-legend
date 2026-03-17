@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public bool isSlide;
     public float slideDistance;
     public float slideSpeed;
+    public float powerPerSlide;
 
     public float JumpWallForce;
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public PhysicsMaterial2D _material2DWall;
     private PlayerAnimatiorController _animator;
     private CapsuleCollider2D _collider;
+    private Charactor _Charactor;
 
     private bool _isJumpingToWall;
 
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         _physicsCheck = GetComponent<PhysicsCheck>();
         _animator = GetComponent<PlayerAnimatiorController>();
+        _Charactor = GetComponent<Charactor>();
         InputController.Playing.Jump.started += Jump;
         InputController.Playing.Attack.started += Attack;
         InputController.Playing.Slide.started += Slide;
@@ -110,9 +113,11 @@ public class PlayerController : MonoBehaviour
 
     private void Slide(InputAction.CallbackContext obj)
     {
-        if (!isSlide)
+        if (!isSlide && _Charactor.currentPower>=powerPerSlide)
         {
             isSlide = true;
+            _Charactor.currentPower -= powerPerSlide;
+            _Charactor.OnChangePowerEvent?.Invoke(_Charactor);
             var targetPoint = new Vector2(transform.position.x + transform.localScale.x * slideDistance,
                 transform.position.y);
             gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
