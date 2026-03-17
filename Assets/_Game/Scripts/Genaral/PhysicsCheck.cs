@@ -62,11 +62,11 @@ public class PhysicsCheck : MonoBehaviour
             isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + offset, radius, groundLayer);
         _nearRightWall = Physics2D.OverlapCircle(
             (Vector2)transform.position + _capsuleCollider2d.offset +
-            new Vector2(_capsuleCollider2d.size.x / 2 + radius, _capsuleCollider2d.size.y),
+            new Vector2(_capsuleCollider2d.size.x / 2 + radius, 0),
             radius, groundLayer);
         _nearLeftWall = Physics2D.OverlapCircle(
             (Vector2)transform.position + _capsuleCollider2d.offset +
-            new Vector2(-_capsuleCollider2d.size.x / 2 - radius, _capsuleCollider2d.size.y),
+            new Vector2(-_capsuleCollider2d.size.x / 2 - radius, 0),
             radius, groundLayer);
 
         if (((_nearLeftWall && _playerController.inputDirection.x < 0) ||
