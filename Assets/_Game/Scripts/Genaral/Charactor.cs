@@ -7,6 +7,10 @@ public class Charactor : MonoBehaviour
 
     public int currentHealth;
 
+    public float maxPower;
+    public float currentPower;
+    public float recoverSpeed;
+
     //无敌时间最大
     public float _invincibleTimeMax = 1f;
 
@@ -18,6 +22,7 @@ public class Charactor : MonoBehaviour
     public UnityEvent OnDeadEvent;
 
     public UnityEvent<Charactor> OnChangeHealthEvent;
+    public UnityEvent<Charactor> OnChangePowerEvent;
 
     //是否无敌
     public bool _isInvincible;
@@ -29,10 +34,12 @@ public class Charactor : MonoBehaviour
     {
         //初始化
         currentHealth = maxHealth;
+        currentPower = maxPower;
         _isInvincible = false;
         _invincibleTime = _invincibleTimeMax;
         isDie = false;
         OnChangeHealthEvent?.Invoke(this);
+        OnChangePowerEvent?.Invoke(this);
     }
 
     private void Update()
@@ -43,6 +50,13 @@ public class Charactor : MonoBehaviour
             _invincibleTime -= Time.deltaTime;
             if (_invincibleTime <= 0)
                 _isInvincible = false;
+        }
+
+        //恢复power
+        if (currentPower <= maxPower)
+        {
+            currentPower += Time.deltaTime * recoverSpeed;
+            OnChangePowerEvent.Invoke(this);
         }
     }
 

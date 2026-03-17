@@ -10,6 +10,8 @@ public class PhysicsCheck : MonoBehaviour
     public LayerMask groundLayer;
 
     public Vector2 offset;
+    public bool isFaceCliff;
+    public Vector2 faceCliffOffest;
 
     //玩家补丁，因为玩家的朝向和敌人不同，所以方向iaGround的检测范围也要相反
     public bool isPlayer;
@@ -49,6 +51,11 @@ public class PhysicsCheck : MonoBehaviour
             (Vector2)transform.position + _capsuleCollider2d.offset +
             new Vector2(-_capsuleCollider2d.size.x / 2 - radius, 0),
             radius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(
+            (Vector2)transform.position +
+            transform.localScale.x * (faceCliffOffest + new Vector2(_capsuleCollider2d.size.x / 2 + radius, 0)),
+            radius);
     }
 
     private void Check()
@@ -62,11 +69,17 @@ public class PhysicsCheck : MonoBehaviour
             isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + offset, radius, groundLayer);
         _nearRightWall = Physics2D.OverlapCircle(
             (Vector2)transform.position + _capsuleCollider2d.offset +
-            new Vector2(_capsuleCollider2d.size.x / 2 + radius, _capsuleCollider2d.size.y),
+            new Vector2(_capsuleCollider2d.size.x / 2 + radius, 0),
             radius, groundLayer);
         _nearLeftWall = Physics2D.OverlapCircle(
             (Vector2)transform.position + _capsuleCollider2d.offset +
-            new Vector2(-_capsuleCollider2d.size.x / 2 - radius, _capsuleCollider2d.size.y),
+            new Vector2(-_capsuleCollider2d.size.x / 2 - radius, 0),
+            radius, groundLayer);
+        isFaceCliff = !Physics2D.OverlapCircle((Vector2)transform.position +
+                                               transform.localScale.x * (faceCliffOffest +
+                                                                         new Vector2(
+                                                                             _capsuleCollider2d.size.x / 2 + radius,
+                                                                             0)),
             radius, groundLayer);
 
         if (((_nearLeftWall && _playerController.inputDirection.x < 0) ||

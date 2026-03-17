@@ -450,7 +450,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_10
+      name: slide1
       rect:
         serializedVersion: 2
         x: 0
@@ -472,7 +472,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_11
+      name: slide2
       rect:
         serializedVersion: 2
         x: 56
@@ -494,7 +494,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_12
+      name: slide3
       rect:
         serializedVersion: 2
         x: 112
@@ -516,7 +516,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_13
+      name: slide4
       rect:
         serializedVersion: 2
         x: 168
@@ -538,7 +538,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_14
+      name: slide5
       rect:
         serializedVersion: 2
         x: 224
@@ -560,7 +560,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_15
+      name: slide6
       rect:
         serializedVersion: 2
         x: 280
@@ -582,7 +582,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_16
+      name: slide7
       rect:
         serializedVersion: 2
         x: 336
@@ -604,7 +604,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_17
+      name: slide8
       rect:
         serializedVersion: 2
         x: 392
@@ -1127,14 +1127,6 @@ TextureImporter:
     nameFileIdTable:
       char_blue_2_0: -7788969592466400864
       char_blue_2_1: 6947235399915822845
-      char_blue_2_10: 7287894198381639118
-      char_blue_2_11: -4073948039942414794
-      char_blue_2_12: 947018897634681455
-      char_blue_2_13: -4356423976422220178
-      char_blue_2_14: 1999867929611392887
-      char_blue_2_15: -8982438696405654857
-      char_blue_2_16: 2121103483022644868
-      char_blue_2_17: 1707301320134443118
       char_blue_2_19: -8013758039191449970
       char_blue_2_2: 4932829365207836860
       char_blue_2_21: -611919317893734435
@@ -1165,6 +1157,14 @@ TextureImporter:
       char_blue_2_9: -6692957917487352177
       climb: 280852607772310410
       climb2: 8491257667807011432
+      slide1: 7287894198381639118
+      slide2: -4073948039942414794
+      slide3: 947018897634681455
+      slide4: -4356423976422220178
+      slide5: 1999867929611392887
+      slide6: -8982438696405654857
+      slide7: 2121103483022644868
+      slide8: 1707301320134443118
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

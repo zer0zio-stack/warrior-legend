@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,5 +16,10 @@ public class PlayerStateBar : MonoBehaviour
     public void OnHealthBarChange(float rate)
     {
         healthBar.fillAmount = rate;
+    }
+
+    public void OnPowerBarChange(float arg0CurrentPower)
+    {
+        powerBar.fillAmount = arg0CurrentPower;
     }
 }
