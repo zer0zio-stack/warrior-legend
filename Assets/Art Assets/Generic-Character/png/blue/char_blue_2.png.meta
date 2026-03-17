@@ -626,7 +626,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_18
+      name: climb
       rect:
         serializedVersion: 2
         x: 0
@@ -670,7 +670,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: char_blue_2_20
+      name: climb2
       rect:
         serializedVersion: 2
         x: 112
@@ -1135,10 +1135,8 @@ TextureImporter:
       char_blue_2_15: -8982438696405654857
       char_blue_2_16: 2121103483022644868
       char_blue_2_17: 1707301320134443118
-      char_blue_2_18: 280852607772310410
       char_blue_2_19: -8013758039191449970
       char_blue_2_2: 4932829365207836860
-      char_blue_2_20: 8491257667807011432
       char_blue_2_21: -611919317893734435
       char_blue_2_22: -2131261784233516491
       char_blue_2_23: -8258493901958159639
@@ -1165,6 +1163,8 @@ TextureImporter:
       char_blue_2_7: 5762092745865032870
       char_blue_2_8: -8477398170252658554
       char_blue_2_9: -6692957917487352177
+      climb: 280852607772310410
+      climb2: 8491257667807011432
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

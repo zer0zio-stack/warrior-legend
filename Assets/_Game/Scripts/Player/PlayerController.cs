@@ -15,10 +15,14 @@ public class PlayerController : MonoBehaviour
 
     public bool isAttack;
 
+    public float JumpWallForce;
+
     public PhysicsMaterial2D _material2DNormal;
     public PhysicsMaterial2D _material2DWall;
     private PlayerAnimatiorController _animator;
     private CapsuleCollider2D _collider;
+
+    private bool _isJumpingToWall;
 
     private PhysicsCheck _physicsCheck;
 
@@ -75,6 +79,10 @@ public class PlayerController : MonoBehaviour
             _collider.offset = offsetOriginal;
         }
 
+        //滑墙：这里直接调速度，要是变摩擦力就会黏住
+        if (_physicsCheck.onWall) _rb.linearVelocityY = _rb.linearVelocityY / 3;
+        if (_isJumpingToWall && _rb.linearVelocityY < 0) _isJumpingToWall = false;
+
         switchMaterial();
     }
 
@@ -113,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
     private void move()
     {
-        if (!isCrouch)
+        if (!isCrouch && !_isJumpingToWall)
             _rb.linearVelocityX = inputDirection.x * speed * Time.deltaTime;
 
 
@@ -128,6 +136,11 @@ public class PlayerController : MonoBehaviour
     private void Jump(InputAction.CallbackContext obj)
     {
         if (_physicsCheck.isGrounded) _rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        if (_physicsCheck.onWall)
+        {
+            _rb.AddForce(new Vector2(-inputDirection.x, 4.5f) * JumpWallForce, ForceMode2D.Impulse);
+            _isJumpingToWall = true;
+        }
     }
 
     public void getHurt(Transform attacker)
