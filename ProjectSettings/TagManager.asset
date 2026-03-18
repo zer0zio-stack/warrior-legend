@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - bounds
+  - water
   layers:
   - Default
   - TransparentFX

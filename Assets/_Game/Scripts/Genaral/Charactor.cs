@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -57,6 +58,16 @@ public class Charactor : MonoBehaviour
         {
             currentPower += Time.deltaTime * recoverSpeed;
             OnChangePowerEvent.Invoke(this);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("water"))
+        {
+            currentHealth = 0;
+            OnChangeHealthEvent?.Invoke(this);
+            OnDeadEvent?.Invoke();
         }
     }
 
