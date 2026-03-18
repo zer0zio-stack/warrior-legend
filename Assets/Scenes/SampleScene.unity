@@ -6691,6 +6691,8 @@ MonoBehaviour:
   slideSpeed: 0.3
   powerPerSlide: 5
   JumpWallForce: 12
+  audioEventSo: {fileID: 11400000, guid: 6ed4b20ca9fee5e47ba73eda44185d77, type: 2}
+  jumpClip: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
   _material2DNormal: {fileID: 6200000, guid: a0728630cde975c4b8b70a7bdd8c5866, type: 2}
   _material2DWall: {fileID: 6200000, guid: 6358db590b781554f87ee68bad684f12, type: 2}
 --- !u!114 &1849679025

@@ -22,12 +22,14 @@ public class PlayerController : MonoBehaviour
     public float powerPerSlide;
 
     public float JumpWallForce;
+    public AudioEventSo audioEventSo;
+    public AudioClip jumpClip;
 
     public PhysicsMaterial2D _material2DNormal;
     public PhysicsMaterial2D _material2DWall;
     private PlayerAnimatiorController _animator;
-    private CapsuleCollider2D _collider;
     private Charactor _Charactor;
+    private CapsuleCollider2D _collider;
 
     private bool _isJumpingToWall;
 
@@ -113,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
     private void Slide(InputAction.CallbackContext obj)
     {
-        if (!isSlide && _Charactor.currentPower>=powerPerSlide)
+        if (!isSlide && _Charactor.currentPower >= powerPerSlide)
         {
             isSlide = true;
             _Charactor.currentPower -= powerPerSlide;
@@ -139,6 +141,7 @@ public class PlayerController : MonoBehaviour
             _rb.MovePosition(new Vector2(transform.position.x + transform.localScale.x * slideSpeed,
                 transform.position.y));
         } while (MathF.Abs(targetPoint.x - transform.position.x) > 0.1f);
+
         isSlide = false;
         gameObject.layer = LayerMask.NameToLayer("player");
     }
@@ -182,6 +185,7 @@ public class PlayerController : MonoBehaviour
             isSlide = false;
         }
 
+        audioEventSo.Raise(jumpClip);
         if (_physicsCheck.isGrounded) _rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         if (_physicsCheck.onWall)
         {
