@@ -23,7 +23,8 @@ public class PhysicsCheck : MonoBehaviour
     private void Awake()
     {
         _capsuleCollider2d = GetComponent<CapsuleCollider2D>();
-        if (isPlayer) _playerController = GetComponent<PlayerController>();
+        if (isPlayer) 
+            _playerController = GetComponent<PlayerController>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -82,6 +83,7 @@ public class PhysicsCheck : MonoBehaviour
                                                                              0)),
             radius, groundLayer);
 
+        if (!isPlayer) return;
         if (((_nearLeftWall && _playerController.inputDirection.x < 0) ||
              (_nearRightWall && _playerController.inputDirection.x > 0))
             && _rigidbody2D.linearVelocityY < 0)
