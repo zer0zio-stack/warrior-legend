@@ -190,6 +190,15 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cofirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""d86b105a-df64-45af-9a69-d3cdf5af5e85"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -643,6 +652,28 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
                     ""action"": ""Slide"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00657852-3ccd-4bcd-bf6c-68338d0419f9"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Cofirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad509ebd-9f71-4122-b138-630ee68ee28f"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Cofirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1239,6 +1270,7 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
         m_Playing_Sprint = m_Playing.FindAction("Sprint", throwIfNotFound: true);
         m_Playing_OnWalk = m_Playing.FindAction("OnWalk", throwIfNotFound: true);
         m_Playing_Slide = m_Playing.FindAction("Slide", throwIfNotFound: true);
+        m_Playing_Cofirm = m_Playing.FindAction("Cofirm", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1343,6 +1375,7 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Playing_Sprint;
     private readonly InputAction m_Playing_OnWalk;
     private readonly InputAction m_Playing_Slide;
+    private readonly InputAction m_Playing_Cofirm;
     /// <summary>
     /// Provides access to input actions defined in input action map "Playing".
     /// </summary>
@@ -1398,6 +1431,10 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Playing/Slide".
         /// </summary>
         public InputAction @Slide => m_Wrapper.m_Playing_Slide;
+        /// <summary>
+        /// Provides access to the underlying input action "Playing/Cofirm".
+        /// </summary>
+        public InputAction @Cofirm => m_Wrapper.m_Playing_Cofirm;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1457,6 +1494,9 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
             @Slide.started += instance.OnSlide;
             @Slide.performed += instance.OnSlide;
             @Slide.canceled += instance.OnSlide;
+            @Cofirm.started += instance.OnCofirm;
+            @Cofirm.performed += instance.OnCofirm;
+            @Cofirm.canceled += instance.OnCofirm;
         }
 
         /// <summary>
@@ -1501,6 +1541,9 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
             @Slide.started -= instance.OnSlide;
             @Slide.performed -= instance.OnSlide;
             @Slide.canceled -= instance.OnSlide;
+            @Cofirm.started -= instance.OnCofirm;
+            @Cofirm.performed -= instance.OnCofirm;
+            @Cofirm.canceled -= instance.OnCofirm;
         }
 
         /// <summary>
@@ -1878,6 +1921,13 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSlide(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cofirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCofirm(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

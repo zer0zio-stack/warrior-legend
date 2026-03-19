@@ -11,4 +11,9 @@ public class AudioScript : MonoBehaviour
         if (isEnabled)
             audioEvent.Raise(clip);
     }
+    
+    public void PlayAudio()
+    {
+        audioEvent.Raise(clip);
+    }
 }
