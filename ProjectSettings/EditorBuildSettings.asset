@@ -6,8 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StoneLevel.unity
+    path: Assets/Scenes/Persistent.unity
+    guid: 5ee0fd94d8abc034ca98657981878d31
+  - enabled: 0
+    path: Assets/Scenes/StoneScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 0
+    path: Assets/Scenes/TreeScene.unity
+    guid: 4497faedfed93364db7a46ff3bbe8d54
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 6e44bb7135e684d48a00adc3bb7f1db1, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 27df657303bc101488853627dea16254, type: 3}
   m_UseUCBPForAssetBundles: 0
