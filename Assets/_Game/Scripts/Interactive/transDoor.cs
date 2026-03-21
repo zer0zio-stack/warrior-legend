@@ -8,6 +8,6 @@ public class transDoor : MonoBehaviour,IInteractive
 
     public void Interactive()
     {
-        LoadSceneEventSo.Raise(TargetSceneData);
+        LoadSceneEventSo.Raise(TargetSceneData,targetPos,true);
     }
 }

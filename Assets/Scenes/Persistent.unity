@@ -233,8 +233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7307e999f70f3aa43ad4e16f56a44174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadSceneController
-  firstScene: {fileID: 11400000, guid: 5aba2bc84ce652c4f8155d010e155c39, type: 2}
+  firstScene: {fileID: 11400000, guid: 5ff609af25c59064dbc2144d400a69ec, type: 2}
   loadSceneEventSo: {fileID: 11400000, guid: 0241c14709aaab54397336c33099a322, type: 2}
+  playerTransform: {fileID: 1849679021}
+  afterLoadSceneEvent: {fileID: 11400000, guid: b724c774b3e57d84fa7bf32f5a316093, type: 2}
+  startPosition: {x: 4.15, y: 2.01, z: 0}
 --- !u!4 &94560471
 Transform:
   m_ObjectHideFlags: 0
@@ -768,7 +771,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.010019, y: -13.51, z: -10}
+  m_LocalPosition: {x: 4.1500187, y: 3.5100002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1168,7 +1171,7 @@ Transform:
   m_GameObject: {fileID: 764220188}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.010019, y: -13.51, z: -10}
+  m_LocalPosition: {x: 4.1500187, y: 3.5100002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1208,6 +1211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   source: {fileID: 42076876}
   VoidEventSo: {fileID: 11400000, guid: cdd484a247d2ddf45854ef93f47b20a5, type: 2}
+  AfterLoadSceneEvent: {fileID: 11400000, guid: b724c774b3e57d84fa7bf32f5a316093, type: 2}
 --- !u!114 &764220194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2259,7 +2263,7 @@ Transform:
   m_GameObject: {fileID: 1849679019}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.01, y: -15.01, z: 0}
+  m_LocalPosition: {x: 4.15, y: 2.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

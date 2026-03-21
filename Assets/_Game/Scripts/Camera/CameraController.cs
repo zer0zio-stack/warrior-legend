@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     private CinemachineConfiner2D cinemachineConfiner;
     public CinemachineImpulseSource source;
     public VoidEventSo VoidEventSo;
+    public VoidEventSo AfterLoadSceneEvent;
 
     private void Awake()
     {
@@ -21,11 +22,13 @@ public class CameraController : MonoBehaviour
     private void OnEnable()
     {
         VoidEventSo.VoidEventAction += _cameraShake;
+        AfterLoadSceneEvent.VoidEventAction+=_setConfiner;
     }
 
     private void OnDisable()
     {
         VoidEventSo.VoidEventAction -= _cameraShake;
+        AfterLoadSceneEvent.VoidEventAction -= _setConfiner;
     }
 
     private void _cameraShake()
